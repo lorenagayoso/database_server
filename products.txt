@@ -1,53 +1,52 @@
 [
   {
-    "title": "Camisa GHI",
-    "price": 10,
-    "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
-    "stock": 0,
+    "title": "Camisa ABC",
+    "price": "19",
+    "thumbnail": "https://m.media-amazon.com/images/I/81u5UFL5yKS._AC_SX466._SX._UX._SY._UY_.jpg",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "stock": "5",
     "id": 1,
-    "timestamp": "27/3/2022 19:07:55",
-    "sku": "BRFUR"
+    "timestamp": "30/3/2022 23:03:30",
+    "sku": "7QLP8"
   },
   {
-    "title": "Camisa GHI",
-    "price": 10,
-    "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
-    "stock": 4,
+    "title": "Camisa DEF",
+    "price": "21",
+    "thumbnail": "https://m.media-amazon.com/images/I/81QamGQMAeL._AC_SX466._SX._UX._SY._UY_.jpg",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "stock": "10",
     "id": 2,
-    "timestamp": "27/3/2022 19:07:55",
-    "sku": "OGP6S"
+    "timestamp": "30/3/2022 23:03:30",
+    "sku": "JGYCY"
   },
   {
-    "title": "Camisa GHI",
-    "price": 10,
+    "title": "Camisa BNN",
+    "price": 33,
     "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
-    "stock": 2,
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "stock": 12,
     "id": 3,
-    "timestamp": "27/3/2022 19:07:55",
-    "sku": "W0RCX"
+    "timestamp": "30/3/2022 23:03:30",
+    "sku": "B395Y"
   },
   {
-    "title": "Camisa GHI",
-    "price": 10,
-    "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
-    "stock": 11,
+    "title": "Camisa ABC",
+    "price": "13",
+    "thumbnail": "https://m.media-amazon.com/images/I/81u5UFL5yKS._AC_SX466._SX._UX._SY._UY_.jpg",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "stock": "15",
     "id": 4,
-    "timestamp": "27/3/2022 19:07:55",
-    "sku": "O8VO5"
+    "timestamp": "30/3/2022 23:03:30",
+    "sku": "7AKA8"
   },
   {
-    "title": "Camisa GHI",
-    "price": 10,
-    "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
-    "stock": 87,
+    "title": "Camisa DEF",
+    "price": "22",
+    "thumbnail": "https://m.media-amazon.com/images/I/81QamGQMAeL._AC_SX466._SX._UX._SY._UY_.jpg",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "stock": "7",
     "id": 5,
-    "timestamp": "27/3/2022 19:07:55",
-    "sku": "ONXJ7"
+    "timestamp": "30/3/2022 23:03:30",
+    "sku": "JGYTE"
   }
-  
 ]

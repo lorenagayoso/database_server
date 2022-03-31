@@ -40,30 +40,6 @@ router.get('/', function(req, res) {
 
 
 
-router.get('/about', (req,res) => {
-
-try{
-          function getProducts(){
-          const contenido = fs.readFileSync('./products.txt', 'utf-8') 
-          const json = JSON.parse(contenido.split(","))
-          return json
-          }
-        }
-    
-      catch(err) {
-        console.log("contenido no leido",err)
-      }   
-
-const products = getProducts()
-
-res.render('pages/about', {
-        products: products
-    });
-
-})
-
-
-
 router.get('/carrito', (req,res) => {
 
 try{
@@ -88,18 +64,18 @@ res.render('pages/carrito', {
 
 
 
-//GET: '/:id?' - Me permite listar todos los productos disponibles ó un producto por su id (usuarios)
+//GET: '/' - Me permite listar todos los productos disponibles
 
-router.get('/:id?', (req,res) => {
+router.get('/api/productos', (req,res) => {
 
-let product_list 
+let product_list
 
 try{
           function getId(){
           const contenido = fs.readFileSync('./products.txt', 'utf-8') 
           const json = JSON.parse(contenido.split(","))
           product_list = json
-          return json.find(product => product.id == req.params.id)
+          return json
           }
         }
     
@@ -107,15 +83,14 @@ try{
         console.log("contenido no leido",err)
       } 
 
-res.render('pages/index');
-
 if (getId() === undefined) {
-console.log(product_list)}
-else {console.log(getId())}
+res.json(product_list)}
+else {res.json(getId())}
 
+console.log('Mostrando productos disponibles en consola')
 })
 
-//GET: '/:id?' - Me permite listar todos los productos disponibles ó un producto por su id (admins)
+//GET: '/:id?' - Me permite listar un producto por su id
 
 router.get('/api/productos/:id', (req,res) => {
 
@@ -237,6 +212,7 @@ res.json({mensaje: 'producto actualizado con exito'})
 
 })
 
+
 //DELETE: '/:id' - Borra un producto por su id
 
 
@@ -325,7 +301,7 @@ const info = JSON.stringify(postCart(),null,2)
       } 
 //Si no hay ningun error, mostrar mensaje de exito en la consola
       else {
-        console.log('Carrito creado')
+        console.log(`Carrito ${setId} creado`)
       }
     })
 
@@ -442,7 +418,7 @@ console.log(info)
       } 
 //Si no hay ningun error, mostrar mensaje de exito en la consola
       else {
-        console.log('Carrito eliminado')
+        console.log(`Carrito ${cartId} eliminado`)
       }
     })
 

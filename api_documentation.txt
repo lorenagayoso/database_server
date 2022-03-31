@@ -1,0 +1,87 @@
+
+------ PRODUCTS ENDPOINTS ------
+a.
+
+# Muestra todos los productos disponibles en la consola
+# Method: GET
+
+localhost:8080/api/productos
+
+b.
+
+# Muestra un producto en específico según id solicitado
+# Method: GET
+
+localhost:8080/api/productos/:id
+
+c.
+# Añade un producto al listado
+# Method: POST
+
+# Herramienta de validación: Formulario
+
+localhost:8080
+
+# Herramienta de validación: postman
+
+localhost:8080/api/productos
+
+
+d.
+
+# Actualiza un producto en específico según id solicitado
+# Method: PUT
+
+localhost:8080/api/productos/:id
+
+e.
+
+# Elimina un producto de la lista segun id especificado
+# Method: DELETE
+
+localhost:8080/api/productos/:id
+
+
+
+
+------ CART ENDPOINTS ------
+
+
+a.
+
+# Crea un carrito, lo añade al listado y devuelve su id
+# Method: POST
+
+localhost:8080/api/carrito
+
+
+b.
+
+# Incorpora productos al carrito por su id de producto
+# Method: POST
+
+localhost:8080/:id/productos/:itemId
+
+
+
+c.
+
+# Elimina carrito por su id
+# Method: DELETE
+
+localhost:8080/:id/productos
+
+
+d.
+
+# Elimina productos del carrito por su el id de producto y de carrito
+# Method: DELETE
+
+localhost:8080/:id/productos/:itemId
+
+e.
+
+# Muestra todos los productos disponibles en un carrito segun su id
+# Method: GET
+
+localhost:8080/:id/productos
