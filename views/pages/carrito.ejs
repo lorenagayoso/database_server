@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+
+<div id="body">
+
+    <div class="card-container">
+
+        <% products.forEach(function(product) { %>
+
+                <div class="card">
+                    <img src= <%= product.thumbnail %> alt="Avatar" style="width:100%">
+                    <div class="card-item">
+                    <h4 style="color:white; margin-top:5px;"><b> <%= product.title %> </b></h4>
+                    <p style="color:white; font-size: small; margin-top:5px;">  <%= product.description %></p>
+                    <% if (product.stock > 9) {%> 
+                    <p style="color:green; margin-top:5px;"> Disponible </p>
+                    <% } else if (product.stock > 1 && product.stock < 9) {%> 
+                    <p style="color:yellow; margin-top:5px;"> Últimos <%= product.stock%> items </p>
+                    <%} else { %>
+                    <p style="color:red; margin-top:5px;"> No disponible </p>
+                    <% } %>
+                    <p style="color:white; margin-top:5px; margin-bottom: 5px;"> <span class="currency"> $ </span> <%= product.price %> </p>
+                  </div>
+                </div>
+           <% }); %>
+
+    </div>
+
+</div>
+
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

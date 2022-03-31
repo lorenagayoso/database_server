@@ -1,20 +1,53 @@
 [
   {
-    "title": "Camisa ABC",
-    "price": 19.25,
-    "thumbnail": "https://m.media-amazon.com/images/I/81u5UFL5yKS._AC_SX466._SX._UX._SY._UY_.jpg",
-    "id": 1
-  },
-  {
-    "title": "Camisa DEF",
-    "price": 20.15,
-    "thumbnail": "https://m.media-amazon.com/images/I/81QamGQMAeL._AC_SX466._SX._UX._SY._UY_.jpg",
-    "id": 2
+    "title": "Camisa GHI",
+    "price": 10,
+    "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
+    "stock": 0,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "id": 1,
+    "timestamp": "27/3/2022 19:07:55",
+    "sku": "BRFUR"
   },
   {
     "title": "Camisa GHI",
     "price": 10,
     "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
-    "id": 3
+    "stock": 4,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "id": 2,
+    "timestamp": "27/3/2022 19:07:55",
+    "sku": "OGP6S"
+  },
+  {
+    "title": "Camisa GHI",
+    "price": 10,
+    "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
+    "stock": 2,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "id": 3,
+    "timestamp": "27/3/2022 19:07:55",
+    "sku": "W0RCX"
+  },
+  {
+    "title": "Camisa GHI",
+    "price": 10,
+    "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
+    "stock": 11,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "id": 4,
+    "timestamp": "27/3/2022 19:07:55",
+    "sku": "O8VO5"
+  },
+  {
+    "title": "Camisa GHI",
+    "price": 10,
+    "thumbnail": "https://m.media-amazon.com/images/I/81eIWDtZFJS._AC_SX466._SX._UX._SY._UY_.jpg",
+    "stock": 87,
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "id": 5,
+    "timestamp": "27/3/2022 19:07:55",
+    "sku": "ONXJ7"
   }
+  
 ]
