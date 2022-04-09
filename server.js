@@ -2,8 +2,11 @@
 const express = require('express');
 const app = express();
 const fs = require('fs')
+const {options} = require('./options/mariaDB')
+const knex = require('knex')(options)
 
-const port = 8080
+
+const port = 9090
 
 app.use(express.static(__dirname + '/public'));
 
@@ -16,6 +19,7 @@ const server = app.listen(port,()=>{
 })
 
 server.on('error',(error)=> console.log(`hubo error en  ${error}` ) )
+
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -37,7 +41,6 @@ function random(length) {
 router.get('/', function(req, res) {
     res.render('pages/index');
 });
-
 
 
 router.get('/carrito', (req,res) => {
@@ -68,188 +71,129 @@ res.render('pages/carrito', {
 
 router.get('/api/productos', (req,res) => {
 
-let product_list
+knex
+.from('productos')
+.select('*')
+.then((data) => {
+  for (registro of data){
+    console.log(`
+      ${registro.id} ${registro.title} ${registro.price} ${registro.thumbnail} ${registro.description} ${registro.timestamp} ${registro.stock} ${registro.sku}
+      `)
+  }})
+.catch((err) => {console.log(err); throw err})
+.finally(() => {
+    knex.destroy();
+  }); 
 
-try{
-          function getId(){
-          const contenido = fs.readFileSync('./products.txt', 'utf-8') 
-          const json = JSON.parse(contenido.split(","))
-          product_list = json
-          return json
-          }
-        }
-    
-      catch(err) {
-        console.log("contenido no leido",err)
-      } 
+res.json({mensaje: `productos disponibles mostrados en consola`})
 
-if (getId() === undefined) {
-res.json(product_list)}
-else {res.json(getId())}
-
-console.log('Mostrando productos disponibles en consola')
 })
 
 //GET: '/:id?' - Me permite listar un producto por su id
 
 router.get('/api/productos/:id', (req,res) => {
 
-try{
-          function getId(){
-          const contenido = fs.readFileSync('./products.txt', 'utf-8') 
-          const json = JSON.parse(contenido.split(","))
-          return json.find(product => product.id == req.params.id)
-          }
-        }
-    
-      catch(err) {
-        console.log("contenido no leido",err)
-      } 
+const productId = req.params.id
 
-if(getId() == 'undefined') {res.json({ error : 'producto no encontrado' })}
+knex
+.from('productos')
+.select('*')
+.where('id', productId)
+.then((data) => {
+  for (registro of data){
+    console.log(`${registro.id} ${registro.title} ${registro.sku} ${registro.price}`)
+  }})
+.catch((err) => {console.log(err); throw err})
+.finally(() => {
+    knex.destroy();
+  }); 
 
-else {res.json(getId())}  
+res.json({mensaje: `producto con id: ${productId} mostrado en consola`})
 
 })
-
 
 //POST: '/' - Para incorporar productos al listado (usuarios y admins)
 
 router.post(['/','/api/productos'], (req,res) => {
-let setId
+
 try{
-      
-         let result = req.body; 
-      
+            
           function postProducts(){
-            //En este punto es un string
-            const contenido = fs.readFileSync('./products.txt', 'utf-8') 
-            //Aqui ya es un objeto
-            let json = []
-              if(contenido.length > 0) {json = JSON.parse(contenido.split(","))}
-              const body = result
-              setId = json.length + 1
-              body.id = setId
-              body.timestamp = timestamp
-              body.sku = random(5)
-              json.push(body)
-              return json
+            let productList = []
+            const newProduct = req.body
+
+            newProduct.sku = random(5)
+
+            productList.push(newProduct)
+            
+            return productList
+
           }
-        }
+    }
     
-      catch(err) {
-        console.log(err)
-      }   
+catch(err) {console.log(err)}   
 
 
-// De Objeto, lo vuelvo a pasar a string con stringify
 
-const info = JSON.stringify(postProducts(),null,2)
+knex('productos')
+  .insert(postProducts())
+  .then(() => console.log("product inserted"))
+  .catch((err) => {console.log(err); throw err})
+  .finally(() => {
+  knex.destroy();
+  });
 
-// finalmente, sobre escribo el contenido del archivo txt con el nuevo array hecho string
-
-    fs.writeFile('./products.txt' , info , (error, data) => {
-
-//Si hay algun error al guardar el archivo, mostrar en consola tal error
-      if(error){
-        console.log(error)
-      } 
-//Si no hay ningun error, mostrar mensaje de exito en la consola
-      else {
-        console.log('Productos agregados')
-      }
-    })
 
 if(req.originalUrl === '/api/productos') {res.json({mensaje: 'producto agregado con exito'})}
 else {res.render('pages/index')};
 })
 
-
-
 //PUT: '/:id' - Actualiza un producto por su id (admins)
 
 router.put('/api/productos/:id', (req,res) => {
 
-let json
 
-try{
-          function putId(){
-          const contenido = fs.readFileSync('./products.txt', 'utf-8') 
-          json = JSON.parse(contenido.split(","))
-          const selected = json.find(product => product.id == req.params.id)
-          selected.title = req.body.title
-          selected.price = req.body.price
-          selected.thumbnail = req.body.thumbnail
-          selected.description = req.body.description
-          selected.stock = req.body.stock
-          return json
-          }
-        }
-    
-      catch(err) {
-        console.log(err)
-      } 
+const productId = req.params.id
 
-// De Objeto, lo vuelvo a pasar a string con stringify
+const body = req.body
 
-    const info = JSON.stringify(putId(),null,2)
 
-// finalmente, sobre escribo el contenido del archivo txt con el nuevo array hecho string
+knex('productos')
+  .where({ id: productId })
+  .update({
+  title: body.title,
+  price: body.price,
+  thumbnail: body.thumbnail ,
+  description: body.description,
+  stock: body.stock
+  })
+  .then(() => console.log("product updated"))
+  .catch((err) => {console.log(err); throw err})
+  .finally(() => {
+  knex.destroy();
+  });
 
-    fs.writeFile('./products.txt' , info , (error, data) => {
-
-//Si hay algun error al guardar el archivo, mostrar en consola tal error
-      if(error){
-        console.log(error)
-      } 
-//Si no hay ningun error, mostrar mensaje de exito en la consola
-      else {
-        console.log('Producto actualizado')
-      }
-    })
-
-res.json({mensaje: 'producto actualizado con exito'})
+res.json({mensaje: `producto ${productId} actualizado con exito`})
 
 })
 
 
 //DELETE: '/:id' - Borra un producto por su id
 
-
 router.delete('/api/productos/:id', (req,res) => {
 
-try{
-          function deleteId(){
-          const contenido = fs.readFileSync('./products.txt', 'utf-8') 
-          const json = JSON.parse(contenido.split(","))
-          const filtered = json.filter(product => product.id != req.params.id)
-          return filtered
-        }
-        }
-    
-      catch(err) {
-        console.log(err)
-      } 
+productId = req.params.id
 
-// De Objeto, lo vuelvo a pasar a string con stringify
+knex('productos')
+  .where('id', productId)
+  .del()
+  .then(() => console.log("row dropped"))
+  .catch((err) => {console.log(err); throw err})
+  .finally(() => {
+  knex.destroy();
+  });
 
-    const info = JSON.stringify(deleteId(),null,2)
-
-// finalmente, sobre escribo el contenido del archivo txt con el nuevo array hecho string
-
-    fs.writeFile('./products.txt' , info , (error, data) => {
-
-//Si hay algun error al guardar el archivo, mostrar en consola tal error
-      if(error){
-        console.log(error)
-      } 
-//Si no hay ningun error, mostrar mensaje de exito en la consola
-      else {
-        console.log(`producto ${req.params.id} eliminado con exito`)
-      }
-    })
-
-res.json({mensaje: `producto ${req.params.id} eliminado con exito`})
+res.json({mensaje: `producto ${productId} eliminado con exito`})
 
 })
 
